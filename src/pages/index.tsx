@@ -1,4 +1,24 @@
+import initialTasks from "../data/mock";
+
 export default function Home() {
+    let tasks = initialTasks;
+    tasks = tasks.filterActives()
+    tasks = tasks.filterCompleted()
+    // tasks = tasks.removeFilter()
+    tasks = tasks.deleteCompleted()
+
+    const renderTasks = () => {
+        return tasks.items.map((task) => {
+            return (
+                <div key={task.id}>
+                    <span>{task.id} | </span>
+                    <span>{task.description} | </span>
+                    <span>{task.completed ? "Completed" : "Active"}</span>
+                </div>
+            );
+        });
+    };
+
     return (
         <div
             className={` 
@@ -10,10 +30,7 @@ export default function Home() {
                 h-screen
             `}
         >
-            <span>Tasks</span>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
+            {renderTasks()}
         </div>
     );
 }
