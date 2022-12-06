@@ -22,7 +22,20 @@ export default class TasksList {
         return this.#filterUsed;
     }
 
-    filterActives() {
+    addTask(newTask:Task): TasksList {
+        const all = [...this.#all]
+        all.push(newTask)
+        return new TasksList(all, this.filterUsed)
+    }
+
+    modifyTask(modifiedTask:Task): TasksList {
+        const all = this.#all.map(task => {
+            return task.id === modifiedTask.id ? modifiedTask : task
+        } )
+        return new TasksList(all, this.filterUsed)
+    }
+
+    filterActives(): TasksList {
         if (!this.showOnlyActives()) {
             return new TasksList(this.#all, FilterType.Actives);
         } else {
@@ -30,7 +43,7 @@ export default class TasksList {
         }
     }
 
-    filterCompleted() {
+    filterCompleted(): TasksList {
         if (!this.showOnlyCompleted()) {
             return new TasksList(this.#all, FilterType.Completed);
         } else {
@@ -38,7 +51,7 @@ export default class TasksList {
         }
     }
 
-    removeFilter() {
+    removeFilter(): TasksList {
         if (!this.showAll()) {
             return new TasksList(this.#all, FilterType.None);
         } else {

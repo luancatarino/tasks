@@ -1,23 +1,9 @@
+import { useState } from "react";
+import List from "../components/List/List";
 import initialTasks from "../data/mock";
 
 export default function Home() {
-    let tasks = initialTasks;
-    tasks = tasks.filterActives()
-    tasks = tasks.filterCompleted()
-    // tasks = tasks.removeFilter()
-    tasks = tasks.deleteCompleted()
-
-    const renderTasks = () => {
-        return tasks.items.map((task) => {
-            return (
-                <div key={task.id}>
-                    <span>{task.id} | </span>
-                    <span>{task.description} | </span>
-                    <span>{task.completed ? "Completed" : "Active"}</span>
-                </div>
-            );
-        });
-    };
+    const [tasks, setTasks] = useState(initialTasks);
 
     return (
         <div
@@ -25,12 +11,16 @@ export default function Home() {
                 flex flex-col 
                 justify-center 
                 items-center 
-                text-white 
-                bg-purple-600 
                 h-screen
+                bg-gray-300
             `}
         >
-            {renderTasks()}
+            <List
+                tasks={tasks}
+                changed={(newTasks) => {
+                    setTasks(newTasks);
+                }}
+            />
         </div>
     );
 }
