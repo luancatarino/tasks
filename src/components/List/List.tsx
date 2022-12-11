@@ -1,5 +1,4 @@
 import TasksList from "../../model/TasksList";
-import ListButton from "./ListButton";
 import ListFooter from "./ListFooter";
 import ListItem from "./ListItem";
 
@@ -31,11 +30,12 @@ export default function List(props: ListProps) {
     return (
         <div
             className={`
-            flex w-3/5
+            flex w-3/5 items-start relative
         `}
         >
             <ul
                 className={`
+                absolute -top-14
                 w-full list-none
                 bg-white shadow-lg rounded-lg
             `}

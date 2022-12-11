@@ -1,29 +1,33 @@
-import Selection from "./Selection"
+import Selection from "./Selection";
 
 interface ListItemProps {
-    value: string
-    completed: boolean
-    changeStatus: () => void
+    value: string;
+    completed: boolean;
+    changeStatus: () => void;
 }
 
-export default function ListItem(props:ListItemProps) {
+export default function ListItem(props: ListItemProps) {
+    const textStyle = props.completed ? "line-through text-gray-300" : "text-gray-500";
 
-    const textStyle = props.completed ? "line-through text-gray-300" : "text-gray-500"
-
-    return (<li onClick={props.changeStatus} className={`
-        bg-white
-        text-black text-xl
-        p-5
-        border-b border-gray-400
-        cursor-pointer
-        flex items-center
-    `}>
-        <Selection value={props.completed} />
-        <span className={`
+    return (
+        <li
+            onClick={props.changeStatus}
+            className={`
+            text-black            
+            flex items-center p-5 text-xl
+            border-b border-gray-400 cursor-pointer
+    `}
+        >
+            <Selection value={props.completed} />
+            <span
+                className={`
             font-light
             ml-5
             ${textStyle}
-        `}>{props.value}</span>
-
-    </li>)
+        `}
+            >
+                {props.value}
+            </span>
+        </li>
+    );
 }

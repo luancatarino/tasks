@@ -7,9 +7,7 @@ module.exports = {
         "./app/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {
-            backgroundImage: (theme) => ({ "img-tasks": "url('/image/background-to-do.png')" }),
-        },
+        extend: {},
     },
     plugins: [],
 };
